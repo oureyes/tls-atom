@@ -12,16 +12,16 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
  */
 
 // Debug
-const gui = new GUI({
-    width: 300,
-    title: 'Nice debug UI',
-    closeFolders: false
-})
-window.addEventListener('keydown', (event) =>
-{
-    if(event.key == 'h')
-        gui.show(gui._hidden)
-})
+// const gui = new GUI({
+//     width: 300,
+//     title: 'Nice debug UI',
+//     closeFolders: false
+// })
+// window.addEventListener('keydown', (event) =>
+// {
+//     if(event.key == 'h')
+//         gui.show(gui._hidden)
+// })
 const debugObject = {}
 
 // Canvas

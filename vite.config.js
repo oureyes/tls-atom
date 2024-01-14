@@ -15,9 +15,9 @@ export default {
         sourcemap: true, // Add sourcemap,
         rollupOptions: {
             output: {
-                entryFileNames: `dist/[name].js`,
-                chunkFileNames: `dist/[name].js`,
-                assetFileNames: `dist/[name].[ext]`
+                entryFileNames: `js/[name].js`,
+                chunkFileNames: `js/[name].js`,
+                assetFileNames: `css/[name].[ext]`
             }
         }
     },
