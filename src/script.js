@@ -35,7 +35,7 @@ const sizes = {
     height: canvas.offsetHeight
 }
 
-const speed = 20
+let speed = 20
 const radio = 2.5
 
 // Scene
@@ -43,6 +43,7 @@ const scene = new THREE.Scene()
 
 // mouse
 const mouse = new THREE.Vector2()
+const cursor = new THREE.Vector2()
 
 window.addEventListener('mousemove', (event) =>
 {
@@ -302,8 +303,8 @@ const circleDetox = new THREE.Mesh( circlegeometry, circlematerial );
 
 const detoxAngle = 580
 detox.position.z = 0.009
-detox.position.x = - Math.cos((detoxAngle/200) * 4) * 2.5
-detox.position.y = - Math.sin((detoxAngle/200) * 4) * 2.5
+detox.position.x = - Math.cos((detoxAngle/200) * 4) * radio
+detox.position.y = - Math.sin((detoxAngle/200) * 4) * radio
 detox.rotation.z = detoxAngle * 0.02 + Math.PI * 0.5
 
 detox.add( circleDetox )
@@ -346,8 +347,8 @@ const aoxCircle = new THREE.Mesh( aoxgeometry, circlematerial );
 
 const aoxAngle = 190
 aox.position.z = 0.009
-aox.position.x = - Math.cos((aoxAngle/200) * 4) * 2.5
-aox.position.y = - Math.sin((aoxAngle/200) * 4) * 2.5
+aox.position.x = - Math.cos((aoxAngle/200) * 4) * radio
+aox.position.y = - Math.sin((aoxAngle/200) * 4) * radio
 aox.rotation.z = aoxAngle * 0.02 + Math.PI * 0.5
 
 aox.add( aoxCircle )
@@ -395,8 +396,8 @@ renewCirlce.position.y = 0.1
 renewCirlce.position.z = - 0.025
 const renewAngle = 875
 renew.position.z = 0.009
-renew.position.x = - Math.cos((renewAngle/200) * 4) * 2.5
-renew.position.y = - Math.sin((renewAngle/200) * 4) * 2.5
+renew.position.x = - Math.cos((renewAngle/200) * 4) * radio
+renew.position.y = - Math.sin((renewAngle/200) * 4) * radio
 renew.rotation.z = renewAngle * 0.02 + Math.PI * 0.5
 
 renew.add( renewCirlce )
@@ -419,12 +420,6 @@ scene.add(atom);
 /**
  * Points
  */
-const points = [
-    {
-        position: new THREE.Vector3(0, 0, 0),
-        element: document.querySelector('.point-diagnostics')
-    }
-]
 
 const axesHelper = new THREE.AxesHelper()
 // scene.add(axesHelper)
@@ -478,11 +473,12 @@ var createPlanet = function(name, radius, orbit, speed) {
 /**
  * Raycaster
  */
-// const raycaster = new THREE.Raycaster()
+const raycaster = new THREE.Raycaster()
 // let currentIntersect = null
 // const rayOrigin = new THREE.Vector3(- 3, 0, 0)
 // const rayDirection = new THREE.Vector3(10, 0, 0)
 // rayDirection.normalize()
+// raycaster.set(rayOrigin, rayDirection)
 
 
 /**
@@ -518,11 +514,11 @@ renderer.render(scene, camera)
 const clock = new THREE.Clock()
 
 
-gsap.fromTo( section2.scale, { y : 1, x : 1 },{ y: 1.005, x: 1.005, duration: 0.5, delay: 0.5, yoyo: true, repeat: -1, ease: "sine.inOut" })
-gsap.fromTo( section1.scale, { y : 1, x : 1 },{ y: 1.005, x: 1.005, duration: 0.7, delay: 1, yoyo: true, repeat: -1, ease: "sine.inOut" })
-gsap.fromTo( section3.scale, { y : 1, x : 1 },{ y: 1.009, x: 1.009, duration: 0.6, delay: 1.5, yoyo: true, repeat: -1, ease: "sine.inOut" })
+gsap.fromTo( section2.scale, { y : 1, x : 1 },{ y: 1.005, x: 1.005, duration: 1.5, delay: 0.5, yoyo: true, repeat: -1, ease: "sine.inOut" })
+gsap.fromTo( section1.scale, { y : 1, x : 1 },{ y: 1.005, x: 1.005, duration: 1.7, delay: 1, yoyo: true, repeat: -1, ease: "sine.inOut" })
+gsap.fromTo( section3.scale, { y : 1, x : 1 },{ y: 1.009, x: 1.009, duration: 1.4, delay: 1.5, yoyo: true, repeat: -1, ease: "sine.inOut" })
 
-gsap.fromTo( logo.scale, { y : 1, x : 1 },{ y: 1.039, x: 1.039, duration: 1.6, delay: 0.1, yoyo: true, repeat: -1, ease: "sine.inOut" })
+gsap.fromTo( logo.scale, { y : 1, x : 1 },{ y: 1.039, x: 1.039, duration: 1.9, delay: 0.1, yoyo: true, repeat: -1, ease: "sine.inOut" })
 
 
 const tick = () =>
@@ -531,9 +527,10 @@ const tick = () =>
 
     const elapsedTime = clock.getElapsedTime()
 
+    const speedacc = speed;//Math.sin(elapsedTime) * 8 + 20
+    console.log(speedacc);
+
     // logo.quaternion.copy(camera.quaternion)
-    // group.quaternion.copy(camera.quaternion)
-    // group2.quaternion.copy(camera.quaternion)
 
     // Cast a ray
     //raycaster.setFromCamera(mouse, camera)
@@ -545,19 +542,19 @@ const tick = () =>
        
         // elettron1.position.x = Math.cos((elapsedTime/15) * 4) * 2.5
         // elettron1.position.y = Math.sin((elapsedTime/15) * 4) * 2.5
-        point1.position.x = (Math.cos((elapsedTime/speed) * 4) * radio)
-        point1.position.y = (Math.sin((elapsedTime/speed) * 4) * radio) 
+        point1.position.x = (Math.cos((elapsedTime/speedacc) * 4) * radio)
+        point1.position.y = (Math.sin((elapsedTime/speedacc) * 4) * radio) 
 
         // elettron2.position.x = - Math.cos((elapsedTime/20) * 4) * 2.5
         // elettron2.position.y = - Math.sin((elapsedTime/20) * 4) * 2.5
-        point2.position.x = - Math.cos((elapsedTime/speed) * 4) * radio
-        point2.position.y = - Math.sin((elapsedTime/speed) * 4) * radio
+        point2.position.x = - Math.cos((elapsedTime/speedacc) * 4) * radio
+        point2.position.y = - Math.sin((elapsedTime/speedacc) * 4) * radio
 
 
         // elettron3.position.x = - Math.cos((elapsedTime/10) * 4) * 2.5
         // elettron3.position.y = - Math.sin((elapsedTime/10) * 4) * 2.5
-        point3.position.x = - Math.cos((elapsedTime/speed) * 4) * radio
-        point3.position.y = - Math.sin((elapsedTime/speed) * 4) * radio
+        point3.position.x = - Math.cos((elapsedTime/speedacc) * 4) * radio
+        point3.position.y = - Math.sin((elapsedTime/speedacc) * 4) * radio
 
 
     
@@ -567,6 +564,23 @@ const tick = () =>
     camera.position.x = mouse.x * 2
     camera.position.y = mouse.y * 0.4 + 1
     camera.lookAt(new THREE.Vector3())
+
+    // const rayO1 = point1.position
+    // const rayD1 = new THREE.Vector3(point1.position.x, (point1.position.y+0.5), point1.position.z)
+    // raycaster.set(rayO1, rayD1)
+
+    // const intersect1 = raycaster.intersectObjects([ring2,ring3])
+    // console.log(intersect1.length);
+
+    // if(intersect1.length)
+    // {
+
+    //     // point1.material.color.set('#cc0000')
+    // }
+    // else
+    // {
+    //     // point1.material.color.set('#ffffff')
+    // }
 
     // Update controls
     // controls.update()
