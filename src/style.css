@@ -34,7 +34,7 @@ body
 
 .point:hover .text{
     opacity: 1;
-    top: -70px;
+    top: -40px;
 }
 
 .point .label
@@ -61,15 +61,16 @@ body
     position: absolute;
     top: 0px;
     /* left: -120px; */
-    width: 200px;
-    padding: 20px;
-    border-radius: 4px;
-    /* background-color: #00000090; */
-
+    width: auto;
+    padding: 0 20px;
+    border-radius: 0px;
+    background-color: #00000096;
+    font-size: 1.5rem;
     color: white;
     /* text-align: center; */
-    line-height: 1.3em;
+    line-height: 1.1em;
     font-style: italic;
+    font-weight: 500;
     opacity: 0;
     transition: all 0.3s;
     pointer-events: none;

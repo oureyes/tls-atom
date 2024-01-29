@@ -288,21 +288,7 @@ section3.add(point6)
 // section2.add(point8)
 // section3.add(point9)
 
-/**
- * Points of interest
- */
-const points = [
-    {
-        position: new THREE.Vector3(- 0.02, 1.75, - 1.8),
-        element: document.querySelector('.point-diagnostics')
-    }
-]
 
-// action diagnostics
-points[0].element.addEventListener('click', (element) => 
-{
-    console.log(element);
-})
 
 
 /**
@@ -462,19 +448,18 @@ section3.add( renew )
 const point3Angle = 205
 point3.position.x = - Math.cos((point3Angle/200) * 4) * radio
 point3.position.y = - Math.sin((point3Angle/200) * 4) * radio
+
 const point6Angle = 48
 point6.position.x = - Math.cos((point6Angle/200) * 4) * radio
 point6.position.y = - Math.sin((point6Angle/200) * 4) * radio
 
-const textTweaks = gui.addFolder('Awesome cube')
-// cubeTweaks.close()
-
-textTweaks
-    .add(renewCirlce.rotation, 'x')
-    .min(- 20)
-    .max(30)
-    .step(0.01)
-    .name('renew rotation')
+// const textTweaks = gui.addFolder('Awesome cube')
+// textTweaks
+//     .add(renewCirlce.rotation, 'x')
+//     .min(- 20)
+//     .max(30)
+//     .step(0.01)
+//     .name('renew rotation')
 
 /**
  * Orbit rotation
@@ -516,9 +501,69 @@ for (let i = 0; i < turns * objPerTurn; i++) {
   scene.add(plane);
 }
 
+
+debugObject.pointPos = {
+    x : -1.44,
+    y: 0,
+    z: - 2.07
+}
+
 /**
- * Points
+ * Points of interest
  */
+const points = [
+    {
+        position: new THREE.Vector3(- 0.02, 1.75, - 1.8),
+        element: document.querySelector('.point-nutrition')
+    },
+    {
+        position: new THREE.Vector3(1.44, 0, - 2.07),
+        element: document.querySelector('.point-mindfulness')
+    },
+    {
+        position: new THREE.Vector3(1.46, 0, 2.06),
+        element: document.querySelector('.point-coldtherapy')
+    },
+    {
+        position: new THREE.Vector3(0, - 1.77, 1.78),
+        element: document.querySelector('.point-movement')
+    },
+    {
+        position: new THREE.Vector3(- 1.47, 0, 2.06),
+        element: document.querySelector('.point-aesthetics')
+    },
+    {
+        position: new THREE.Vector3(- 1.44, 0, - 2.07),
+        element: document.querySelector('.point-medicine')
+    }
+]
+
+// const pointPos = gui.addFolder('pointPos')
+// pointPos
+//     .add(points[5].position, 'x')
+//     .min(- 20)
+//     .max(30)
+//     .step(0.01)
+//     .name('x Point')
+// pointPos
+//     .add(points[5].position, 'y')
+//     .min(- 20)
+//     .max(30)
+//     .step(0.01)
+//     .name('y Point')
+// pointPos
+//     .add(points[5].position, 'z')
+//     .min(- 20)
+//     .max(30)
+//     .step(0.01)
+//     .name('z Point')
+
+
+// action diagnostics
+points[0].element.addEventListener('click', (element) => 
+{
+    console.log(element);
+})
 
 const axesHelper = new THREE.AxesHelper()
 // scene.add(axesHelper)
